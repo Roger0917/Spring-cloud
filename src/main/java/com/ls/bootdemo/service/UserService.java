@@ -27,11 +27,16 @@ public class UserService implements IUserService {
 
     @Override
     public ServerResponse<PageInfo> findByName(String name, int pageNum, int pageSize) {
+        return null;
+    }
+
+    /*@Override
+    public PageInfo findByName(String name, int pageNum, int pageSize) {
         List<User> list = userMapper.selectAllByName(name);
         PageHelper.startPage(pageNum,pageSize);
         PageInfo pageInfo = new PageInfo(list);
-        return ServerResponse.createBySuccess(pageInfo);
-    }
+        return pageInfo;
+    }*/
 
     @Override
     public List<User> findByName(String name) {

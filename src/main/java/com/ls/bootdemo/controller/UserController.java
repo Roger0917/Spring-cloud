@@ -34,6 +34,7 @@ public class UserController {
 
     @RequestMapping("/index")
     public ModelAndView index(){
+        System.out.println("进入index");
         ModelAndView mav = new ModelAndView();
         mav.setViewName("index");
         return mav;
