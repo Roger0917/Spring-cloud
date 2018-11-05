@@ -17,7 +17,7 @@ public interface IPatientService {
     //List<User> findByName(String name);
     Patient findById(Integer id);
 
-    PageInfo find(String name,int pageNum, int pageSize);
+    List find();
 
     void insert(Patient patient);
 

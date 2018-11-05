@@ -1,5 +1,7 @@
 package com.ls.bootdemo.controller;
 
+import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.ls.bootdemo.entity.Patient;
 import com.ls.bootdemo.service.PatientService;
@@ -41,8 +43,19 @@ public class PatientController {
     }
 
     @RequestMapping("findByPage")
-    public List<Patient> find(@RequestParam("name")String name, @RequestParam("pageNum",required = true,defaultValue = "1")Integer pageNum){
-        PageInfo pageInfo = patientService.find(name,pageNum,3);
-        return pageInfo.getList();
+    public String find(@RequestParam(value = "pageNumber",required = false)Integer pageNumber, @RequestParam(value="pageSize",required = true,defaultValue = "1")Integer pageSize,@RequestParam(value = "name",required = true,defaultValue = "")String name){
+        List list= patientService.find();
+        int total = list.size();
+        PageHelper.startPage(pageNumber,pageSize);
+        List pageInfo= patientService.find();
+        JSONObject result = new JSONObject();
+        result.put("rows",pageInfo);
+        result.put("total",total);
+        System.out.println(result.toJSONString());
+        return result.toJSONString();
+
+
     }
+
+
 }

@@ -97,4 +97,20 @@ public class Patient {
     public void setCreatedate(Date createdate) {
         this.createdate = createdate;
     }
+
+    @Override
+    public String toString() {
+        return "Patient{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", sex='" + sex + '\'' +
+                ", age=" + age +
+                ", phone='" + phone + '\'' +
+                ", category='" + category + '\'' +
+                ", solution='" + solution + '\'' +
+                ", createdate=" + createdate +
+                '}';
+    }
+
+
 }

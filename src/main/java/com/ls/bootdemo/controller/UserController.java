@@ -39,4 +39,11 @@ public class UserController {
         mav.setViewName("index");
         return mav;
     }
+
+    public static void main(String[] args) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("<U se_N m ></U se_N m >");
+        System.out.println(sb.toString());
+        System.out.println("<U se_N m ></U se_N m >");
+    }
 }

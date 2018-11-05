@@ -1,7 +1,6 @@
 package com.ls.bootdemo.dao;
 
 import com.ls.bootdemo.entity.Patient;
-import com.ls.bootdemo.entity.User;
 
 import java.util.List;
 
