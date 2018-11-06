@@ -1,3 +1,4 @@
+/*
 package com.ls.bootdemo.controller;
 
 import javax.xml.ws.RequestWrapper;
@@ -12,11 +13,13 @@ import java.io.IOException;
 
 
 
+*/
 /**
  * 收付款
  * @author Roger
  *
- */
+ *//*
+
 @Controller
 @RequestMapping("/rpc")
 public class ReveivePayController {
@@ -36,14 +39,18 @@ public class ReveivePayController {
 	private static String priRsa = Const.LocalPriRsa;
 	private static String deS = Const.Des3Key;
 
-	/**
+	*/
+/**
 	 * 人民币单笔付款
-	 */
+	 *//*
+
 	@RequestMapping("/pay")
 	public void pay() throws Exception {
-		/**
+		*/
+/**
 		 * 拼接报文
-		 */
+		 *//*
+
 		StringBuilder sb = new StringBuilder();
 		sb.append("<?xml version='1.0' encoding='UTF-8'?>");
 		sb.append("<Transaction>");
@@ -86,14 +93,18 @@ public class ReveivePayController {
 		
 	}
 	
-	/**
+	*/
+/**
 	 * 查询人民币单笔付款交易结果信息
-	 */
+	 *//*
+
 	@RequestMapping("/payRes")
 	public void payResult() throws Exception {
-		/**
+		*/
+/**
 		 * 拼接报文
-		 */
+		 *//*
+
 		StringBuilder sb = new StringBuilder();
 		sb.append("<?xml version='1.0' encoding='UTF-8'?>");
 		sb.append("<Transaction>");
@@ -126,14 +137,18 @@ public class ReveivePayController {
 		System.out.println("响应报文"+respXml);
 	}
 	
-	/**
+	*/
+/**
 	 * 人民币财务公司单笔代理付款
-	 */
+	 *//*
+
 	@RequestMapping("/proxyPay")
 	public void proxyPay() throws Exception {
-		/**
+		*/
+/**
 		 * 拼接报文
-		 */
+		 *//*
+
 		StringBuilder sb = new StringBuilder();
 		sb.append("<?xml version='1.0' encoding='UTF-8'?>");
 		sb.append("<Transaction>");
@@ -177,14 +192,18 @@ public class ReveivePayController {
 		System.out.println("响应报文"+respXml);
 	}
 	
-	/**
+	*/
+/**
 	 * 查询人民币财务公司单笔代理付款交易结果信息
-	 */
+	 *//*
+
 	@RequestMapping("/proxyPayRes")
 	public void proxyPayResult() throws Exception {
-		/**
+		*/
+/**
 		 * 拼接报文
-		 */
+		 *//*
+
 		StringBuilder sb = new StringBuilder();
 		sb.append("<?xml version='1.0' encoding='UTF-8'?>");
 		sb.append("<Transaction>");
@@ -216,14 +235,18 @@ public class ReveivePayController {
 		System.out.println("响应报文"+respXml);
 	}
 	
-	/**
+	*/
+/**
 	 * 外币集团定向式付款申请及审核 
-	 */
+	 *//*
+
 	@RequestMapping("/forDirePay")
 	public void forDirePay() throws Exception {
-		/**
+		*/
+/**
 		 * 拼接报文
-		 */
+		 *//*
+
 		StringBuilder sb = new StringBuilder();
 		sb.append("<?xml version='1.0' encoding='UTF-8'?>");
 		sb.append("<Transaction>");
@@ -271,14 +294,18 @@ public class ReveivePayController {
 		System.out.println("响应报文"+respXml);
 	}
 	
-	/**
+	*/
+/**
 	 * 查询外币单笔付款交易结果信息
-	 */
+	 *//*
+
 	@RequestMapping("/forPayResQ")
 	public void forPayResQ() throws Exception {
-		/**
+		*/
+/**
 		 * 拼接报文
-		 */
+		 *//*
+
 		StringBuilder sb = new StringBuilder();
 		sb.append("<?xml version='1.0' encoding='UTF-8'?>");
 		sb.append("<Transaction>");
@@ -310,14 +337,18 @@ public class ReveivePayController {
 		System.out.println("响应报文"+respXml);
 	}
 	
-	/**
+	*/
+/**
 	 *	查询汇款交易流水信息列表 
-	 */
+	 *//*
+
 	@RequestMapping("/transStreamListQ")
 	public void transStreamListQ() throws Exception {
-		/**
+		*/
+/**
 		 * 拼接报文
-		 */
+		 *//*
+
 		StringBuilder sb = new StringBuilder();
 		sb.append("<?xml version='1.0' encoding='UTF-8'?>");
 		sb.append("<Transaction>");
@@ -353,14 +384,18 @@ public class ReveivePayController {
 		System.out.println("响应报文"+respXml);
 	}
 	
-	/**
+	*/
+/**
 	 *	外币单笔付款交易明细查询 
-	 */
+	 *//*
+
 	@RequestMapping("/transDeaQuery")
 	public void transDeaQuery() throws Exception {
-		/**
+		*/
+/**
 		 * 拼接报文
-		 */
+		 *//*
+
 		StringBuilder sb = new StringBuilder();
 		sb.append("<?xml version='1.0' encoding='UTF-8'?>");
 		sb.append("<Transaction>");
@@ -398,14 +433,18 @@ public class ReveivePayController {
 		System.out.println("响应报文"+respXml);
 	}
 	
-	/**
+	*/
+/**
 	 *	查询外币集团定向式付款交易结果信息
-	 */
+	 *//*
+
 	@RequestMapping("/dirPayResQ")
 	public void dirPayResQ() throws Exception {
-		/**
+		*/
+/**
 		 * 拼接报文
-		 */
+		 *//*
+
 		StringBuilder sb = new StringBuilder();
 		sb.append("<?xml version='1.0' encoding='UTF-8'?>");
 		sb.append("<Transaction>");
@@ -438,14 +477,18 @@ public class ReveivePayController {
 		
 	}
 	
-	/**
+	*/
+/**
 	 *	外币单笔付款流程申请
-	 */
+	 *//*
+
 	@RequestMapping("/appPayProcess")
 	public void appPayProcess() throws Exception {
-		/**
+		*/
+/**
 		 * 拼接报文
-		 */
+		 *//*
+
 		StringBuilder sb = new StringBuilder();
 		sb.append("<?xml version='1.0' encoding='UTF-8'?>");
 		sb.append("<Transaction>");
@@ -499,3 +542,4 @@ public class ReveivePayController {
 		System.out.println("响应报文"+respXml);
 	}
 }
+*/

@@ -58,22 +58,32 @@ public class InformationReportController {
 		sb.append("<MULTI_TENANCY_ID><![CDATA[CN000]]></MULTI_TENANCY_ID>"); //多实体标识
 		sb.append("<LNG_ID><![CDATA[zh-cn]]></LNG_ID>"); //语言标识
 		sb.append("<CHNL_CUST_NO><![CDATA["+ chanl_cust_no+ "]]></CHNL_CUST_NO>"); //电子银行合约编号
-		sb.append("<IttParty_Jrnl_No><![CDATA[]]></IttParty_Jrnl_No>"); //发起方流水号
+		//sb.append("<IttParty_Jrnl_No><![CDATA[]]></IttParty_Jrnl_No>"); //发起方流水号
 		sb.append("<Txn_Itt_IP_Adr><![CDATA["+ip+"]]></Txn_Itt_IP_Adr>"); //交易发起方IP地址
 		sb.append("</Transaction_Header>");
 		
 		sb.append("<Transaction_Body>");
 		sb.append("<request>");
 		sb.append("<ElcSubAR_ID><![CDATA[]]></ElcSubAR_ID>"); //电子合约编号
-		sb.append("<Rvl_Rcrd_Num><![CDATA[]]></Rvl_Rcrd_Num>");	//循环记录条数
-		sb.append("<LIST1 p_type='G'>");
-		sb.append("<..Insn_Seq_No><![CDATA[]]></..Insn_Seq_No>");	//指令序列号
-		sb.append("<..Cash_Cst_AccNo><![CDATA[]]></..Cash_Cst_AccNo>");	//现金客户账户
-		sb.append("<..CshM gt_Acc_TpCd><![CDATA[]]></..CshM gt_Acc_TpCd>"); //现金管理账户类型代码
-		sb.append("<..CcyCd><![CDATA[]]></..CcyCd>"); //币种代码
-		sb.append("<..BkltNo><![CDATA[]]></..BkltNo>"); //存折册号
-		sb.append("<..Dep_DepSeqNo><![CDATA[]]></Dep_DepSeqNo>"); //存款笔号
+		sb.append("<Rvl_Rcrd_Num><![CDATA[3]]></Rvl_Rcrd_Num>");	//循环记录条数
+		sb.append("<LIST1 type='G'>");
+		sb.append("<Insn_Seq_No><![CDATA[]]></Insn_Seq_No>");	//指令序列号
+		sb.append("<Cash_Cst_AccNo><![CDATA[6227000132060030594]]></Cash_Cst_AccNo>");	//现金客户账户
+		sb.append("<CshMgt_Acc_TpCd><![CDATA[1]]></CshMgt_Acc_TpCd>"); //现金管理账户类型代码
+		sb.append("<CcyCd><![CDATA[156]]></CcyCd>"); //币种代码
+		sb.append("<BkltNo><![CDATA[]]></BkltNo>"); //存折册号
+		sb.append("<Dep_DepSeqNo><![CDATA[]]></Dep_DepSeqNo>"); //存款笔号
 		sb.append("</LIST1>");
+
+		sb.append("<ASPD_ECD><![CDATA[00000879]]></ASPD_ECD>");
+		sb.append("<SChl_No><![CDATA[000000000000000]]></SChl_No>");
+		sb.append("<FwCtl_Node_ID><![CDATA[000000000000000]]></FwCtl_Node_ID>");
+		sb.append("<SvM24Hr_Ind><![CDATA[0]]></SvM24Hr_Ind>");
+		sb.append("<Tmzon_ECD><![CDATA[08]]></Tmzon_ECD>");
+		sb.append("<Cmpt_Ent_ID><![CDATA[0000CN000]]></Cmpt_Ent_ID>");
+		sb.append("<CCstTr_ID><![CDATA[CMN0003101838]]></CCstTr_ID>");
+		sb.append("<CCstTrNdID><![CDATA[ND75389000000047925600011]]></CCstTrNdID>");
+
 
 		sb.append("</request>");
 		sb.append("</Transaction_Body>");
@@ -112,16 +122,26 @@ public class InformationReportController {
 		
 		sb.append("<Transaction_Body>");
 		sb.append("<request>");
-		sb.append("<Rvl_Rcrd_Num><![CDATA[]]></Rvl_Rcrd_Num>");	//循环记录条数
+		sb.append("<Rvl_Rcrd_Num><![CDATA[3]]></Rvl_Rcrd_Num>");	//循环记录条数
 		sb.append("<LIST1 p_type='G'>");
-		sb.append("<..AccNo><![CDATA[]]></..AccNo>"); //账号
-		sb.append("<..CCstTr_ID><![CDATA[]]></..CCstTr_ID>"); //现金客户树编号
-		sb.append("<..CCstTrNdID><![CDATA[]]></..CCstTrNdID>"); //现金客户树节点编号
-		sb.append("<CcyCd><![CDATA[]]></CcyCd>"); //币种代码
+		sb.append("<AccNo><![CDATA[6227003604320043309]]></AccNo>"); //账号
+		sb.append("<CCstTr_ID><![CDATA[]]></CCstTr_ID>"); //现金客户树编号
+		sb.append("<CCstTrNdID><![CDATA[]]></CCstTrNdID>"); //现金客户树节点编号
+		sb.append("<CcyCd><![CDATA[157]]></CcyCd>"); //币种代码
 		sb.append("<CshEx_Cd><![CDATA[]]></CshEx_Cd>"); //钞汇代码
-		sb.append("<StDt><![CDATA[]]></StDt>"); //开始日期
-		sb.append("<EdDt><![CDATA[]]></EdDt"); //结束日期
+		sb.append("<StDt><![CDATA[20180520]]></StDt>"); //开始日期
+		sb.append("<EdDt><![CDATA[20181105]]></EdDt>"); //结束日期
 		sb.append("</LIST1>");
+
+		sb.append("<ASPD_ECD><![CDATA[00000879]]></ASPD_ECD>");
+		sb.append("<SChl_No><![CDATA[000000000000000]]></SChl_No>");
+		sb.append("<FwCtl_Node_ID><![CDATA[000000000000000]]></FwCtl_Node_ID>");
+		sb.append("<SvM24Hr_Ind><![CDATA[0]]></SvM24Hr_Ind>");
+		sb.append("<Tmzon_ECD><![CDATA[08]]></Tmzon_ECD>");
+		sb.append("<Cmpt_Ent_ID><![CDATA[0000CN000]]></Cmpt_Ent_ID>");
+		sb.append("<CCstTr_ID><![CDATA[CMN0003101838]]></CCstTr_ID>");
+		sb.append("<CCstTrNdID><![CDATA[ND75389000000047925600011]]></CCstTrNdID>");
+
 		sb.append("</request>");
 		sb.append("</Transaction_Body>");
 		sb.append("</Transaction>");
@@ -152,13 +172,13 @@ public class InformationReportController {
 		sb.append("<MULTI_TENANCY_ID><![CDATA[CN000]]></MULTI_TENANCY_ID>"); //多实体标识
 		sb.append("<LNG_ID><![CDATA[zh-cn]]></LNG_ID>"); //语言标识
 		sb.append("<CHNL_CUST_NO><![CDATA["+ chanl_cust_no+ "]]></CHNL_CUST_NO>"); //电子银行合约编号
-		sb.append("<IttParty_Jrnl_No><![CDATA[]]></IttParty_Jrnl_No>"); //发起方流水号
+		//sb.append("<IttParty_Jrnl_No><![CDATA[]]></IttParty_Jrnl_No>"); //发起方流水号
 		sb.append("<Txn_Itt_IP_Adr><![CDATA["+ip+"]]></Txn_Itt_IP_Adr>"); //交易发起方IP地址
 		sb.append("</Transaction_Header>");
 		
 		sb.append("<Transaction_Body>");
 		sb.append("<request>");
-		sb.append("<Rvl_Rcrd_N um><![CDATA[]]></Rvl_Rcrd_N um>");	//循环记录条数
+		sb.append("<Rvl_Rcrd_Num><![CDATA[3]]></Rvl_Rcrd_Num>");	//循环记录条数
 		sb.append("<LIST1 p_type='G'>");
 		sb.append("<AccNo><![CDATA[]]></..AccNo>"); //账号
 		sb.append("<Beg_Dtl_No><![CDATA[]]></Beg_Dtl_No>"); //起始明细号

@@ -76,26 +76,26 @@ public class PublicTransactionController {
 		sb.append("<SYS_TX_VRSN><![CDATA[01]]></SYS_TX_VRSN>"); //服务版本号 
 		sb.append("<TXN_DT><![CDATA["+ date2 +"]]></TXN_DT>"); //交易日期
 		sb.append("<TXN_TM><![CDATA["+ date3 +"]]> </TXN_TM>"); //交易时间
-		sb.append("<TXN_STFF_ID><![CDATA[333333]]> </TXN_STFF_ID>"); //交易人员编号
+		sb.append("<TXN_STFF_ID><![CDATA[]]> </TXN_STFF_ID>"); //交易人员编号
 		sb.append("<MULTI_TENANCY_ID><![CDATA[CN000]]></MULTI_TENANCY_ID>"); //多实体标识
 		sb.append("<LNG_ID><![CDATA[zh-cn]]></LNG_ID>"); //语言标识
 		sb.append("<CHNL_CUST_NO><![CDATA["+ chanl_cust_no+ "]]></CHNL_CUST_NO>"); //电子银行合约编号
-		sb.append("<IttParty_Jrnl_No><![CDATA[]]></IttParty_Jrnl_No>"); //发起方流水号
+		//sb.append("<IttParty_Jrnl_No><![CDATA[]]></IttParty_Jrnl_No>"); //发起方流水号
 		sb.append("<Txn_Itt_IP_Adr><![CDATA["+ip+"]]></Txn_Itt_IP_Adr>"); //交易发起方IP地址
 		sb.append("</Transaction_Header>");
 		
 		sb.append("<Transaction_Body>");
 		sb.append("<request>");
-
-		sb.append("<ASPD_ECD><![CDATA[00000881]]></ASPD_ECD>");
+		//sb.append("<COM_ENTITY>");
+	/*	sb.append("<ASPD_ECD><![CDATA[00000881]]></ASPD_ECD>");
 		sb.append("<SChl_No><![CDATA[000000000000000]]></SChl_No>");
 		sb.append("<FwCtl_Node_ID><![CDATA[000000000000000]]></FwCtl_Node_ID>");
-		sb.append("<SvM_24H_r_Ind><![CDATA[0]]></SvM_24H_r_Ind>");
-		sb.append("<Tm_zon_ECD><![CDATA[08]]></Tm_zon_ECD>");
-		sb.append("<Cm_pt_Ent_ID><![CDATA[0000CN000]]></Cm_pt_Ent_ID>");
-		sb.append("<CC_stTr_ID><![CDATA[CMN0003101838]]></CC_stTr_ID>");
-		sb.append("<CC_stTrNdID><![CDATA[ND75389000000047925600011]]></CC_stTrNdID>");
-
+		sb.append("<SvM24Hr_Ind><![CDATA[0]]></SvM24Hr_Ind>");
+		sb.append("<Tmzon_ECD><![CDATA[08]]></Tmzon_ECD>");
+		sb.append("<Cmpt_Ent_ID><![CDATA[0000CN000]]></Cmpt_Ent_ID>");
+		sb.append("<CCstTr_ID><![CDATA[CMN0003101838]]></CCstTr_ID>");
+		sb.append("<CCstTrNdID><![CDATA[ND75389000000047925600011]]></CCstTrNdID>");*/
+		//sb.append("</COM_ENTITY>");
 		sb.append("</request>");
 		sb.append("</Transaction_Body>");
 		sb.append("</Transaction>");
@@ -108,17 +108,14 @@ public class PublicTransactionController {
 		System.out.println("响应报文"+respXml);
 		return respXml;
 	}
-	
+
 	/**
-	 * 签退接口
-	 * @throws Exception 
-	 */
 	@RequestMapping("/out")
 	@ResponseBody
 	public String signOut() throws Exception{
-		/**
+		*//**
 		 * 拼接报文
-		 */
+		 *//*
 		StringBuilder sb = new StringBuilder();
 		sb.append("<?xml version='1.0' encoding='UTF-8'?>");
 		sb.append("<Transaction>");
@@ -150,7 +147,7 @@ public class PublicTransactionController {
 		String respXml = sendAndGetXml(xml);
 		System.out.println("响应报文"+respXml);
 		return respXml;
-	}
+	}*/
 	
 	/**
 	 * 发送接收报文通用方法
