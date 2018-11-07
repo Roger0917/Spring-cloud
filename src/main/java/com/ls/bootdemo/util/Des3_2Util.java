@@ -56,7 +56,7 @@ public class Des3_2Util{
         return null;
     }
  
-    public static void main(String[] args) {
+  /*  public static void main(String[] args) {
     	String des = "9020510801"+ "181023";
 		//约定密钥转换成16进制秘钥数组
 		byte[] real3desbyte = asc2bin(des);
@@ -67,7 +67,7 @@ public class Des3_2Util{
 		String decode = Base64.encodeBase64String(DecryptString(resultString, real3desbyte));
 		log.info(decode);
 		
-	}
+	}*/
 	public static byte[] asc2bin(String hexString) {
 		byte[] hexbyte = hexString.getBytes();
 		byte[] bitmap = new byte[hexbyte.length / 2];

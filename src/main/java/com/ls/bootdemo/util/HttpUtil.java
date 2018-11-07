@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URI;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -87,6 +89,8 @@ public class HttpUtil {
             }
             request.setEntity(new UrlEncodedFormEntity(nvps, HTTP.UTF_8));
             request.addHeader("Content-Type", "application/x-www-form-urlencoded");
+            String uri = request.getURI().toString();
+            log.info("uri"+uri);
             HttpResponse response = client.execute(request);
             int code = response.getStatusLine().getStatusCode();
             if (code == 200) {    //请求成功
@@ -175,11 +179,15 @@ public class HttpUtil {
             for (Iterator iter = params.keySet().iterator(); iter.hasNext(); ) {
                 String name = (String) iter.next();
                 String value = String.valueOf(params.get(name));
-                nvps.add(new BasicNameValuePair(name, value));
+                nvps.add(new BasicNameValuePair(name, URLEncoder.encode(value)));
 
                 //System.out.println(name +"-"+value);
             }
+            for (int i = 0; i < nvps.size(); i++) {
+               log.info(nvps.get(i).getName()+"---"+nvps.get(i).getValue());
+            }
             request.setEntity(new UrlEncodedFormEntity(nvps, HTTP.UTF_8));
+            log.info("uri"+request.getURI().toString());
             request.addHeader("Content-Type", "application/x-www-form-urlencoded");
             HttpResponse response = client.execute(request);
             int code = response.getStatusLine().getStatusCode();

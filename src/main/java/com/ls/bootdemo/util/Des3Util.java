@@ -46,7 +46,7 @@ public class Des3Util {
 		return null;
 	}
 
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		String des = "9020510801" + "181023";
 		// 约定密钥转换成16进制秘钥数组
 		byte[] desKey = asc2bin(des);
@@ -59,7 +59,7 @@ public class Des3Util {
 		System.out.println(Base64.encodeBase64String(pubkeyEncrypt));
 		byte[] pubKeyDecrypt = DecryptString(Base64.encodeBase64String(pubkeyEncrypt), desKey);
 		System.out.println(Base64.encodeBase64String(pubKeyDecrypt));
-	}
+	}*/
 
 	public static byte[] asc2bin(String hexString) {
 		byte[] hexbyte = hexString.getBytes();

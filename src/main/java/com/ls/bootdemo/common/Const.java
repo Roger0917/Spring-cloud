@@ -22,11 +22,11 @@ public class Const {
 	 */
 	public static final String CHANL_CUST_NO = "SC51000009020510801"; //电子银行合约编号
 	
-	public static String SYS_REQ_TIME = new SimpleDateFormat("yyyyMMddHHmmssSSS").format(new Date());  //发起方交易时间
+	public static String SYS_REQ_TIME = new SimpleDateFormat("yyyyMMdd HH:mm:ss").format(new Date());  //发起方交易时间
 	
 	public static String TXN_DT = new SimpleDateFormat("yyyyMMdd").format(new Date());  //交易日期
 	
-	public static String TXN_TM = SYS_REQ_TIME.substring(8,14); //交易时间
+	public static String TXN_TM = new SimpleDateFormat("HHmmss").format(new Date()); //交易时间
 	
 	public static String Txn_Itt_IP_Adr = "175.155.75.200"; //交易发起方IP
 	
