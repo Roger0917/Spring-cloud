@@ -78,9 +78,9 @@ public class PublicTransactionController {
 		sb.append("<TXN_STFF_ID><![CDATA[333333]]> </TXN_STFF_ID>"); //交易人员编号
 		sb.append("<MULTI_TENANCY_ID><![CDATA[CN000]]></MULTI_TENANCY_ID>"); //多实体标识
 		sb.append("<LNG_ID><![CDATA[zh-cn]]></LNG_ID>"); //语言标识
-		sb.append("<REC_IN_PAGE></REC_IN_PAGE>");
+		/*sb.append("<REC_IN_PAGE></REC_IN_PAGE>");
 		sb.append("<PAGE_JUMP></PAGE_JUMP>");
-		sb.append("<STS_TRACE_ID></STS_TRACE_ID>");
+		sb.append("<STS_TRACE_ID></STS_TRACE_ID>");*/
 		sb.append("<CHNL_CUST_NO><![CDATA["+ chanl_cust_no+ "]]></CHNL_CUST_NO>"); //电子银行合约编号
 		//sb.append("<IttParty_Jrnl_No><![CDATA[]]></IttParty_Jrnl_No>"); //发起方流水号
 		sb.append("<Txn_Itt_IP_Adr><![CDATA["+ip+"]]></Txn_Itt_IP_Adr>"); //交易发起方IP地址
