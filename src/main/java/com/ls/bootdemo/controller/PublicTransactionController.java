@@ -112,46 +112,6 @@ public class PublicTransactionController {
 	}
 
 	/**
-	@RequestMapping("/out")
-	@ResponseBody
-	public String signOut() throws Exception{
-		*//**
-		 * 拼接报文
-		 *//*
-		StringBuilder sb = new StringBuilder();
-		sb.append("<?xml version='1.0' encoding='UTF-8'?>");
-		sb.append("<Transaction>");
-		sb.append("<Transaction_Header>");
-		sb.append("<SYS_TX_CODE><![CDATA[P1OPME002]]></SYS_TX_CODE>");	//服务名
-		sb.append("<SYS_MSG_LEN><![CDATA[]]></SYS_MSG_LEN>"); //应用报文长度
-		sb.append("<SYS_REQ_TIME><![CDATA["+ date +"]]></SYS_REQ_TIME>"); //发起方交易时间
-		sb.append("<SYS_TX_VRSN><![CDATA[01]]></SYS_TX_VRSN>"); //服务版本号 
-		sb.append("<TXN_DT><![CDATA["+ date2 +"]]></TXN_DT>"); //交易日期
-		sb.append("<TXN_TM><![CDATA["+ date3 +"]]> </TXN_TM>"); //交易时间
-		sb.append("<TXN_STFF_ID><![CDATA[000001]]> </TXN_STFF_ID>"); //交易人员编号
-		sb.append("<MULTI_TENANCY_ID><![CDATA[CN000]]></MULTI_TENANCY_ID>"); //多实体标识
-		sb.append("<LNG_ID><![CDATA[zh-cn]]></LNG_ID>"); //语言标识
-		sb.append("<CHNL_CUST_NO><![CDATA["+ chanl_cust_no+ "]]></CHNL_CUST_NO>"); //电子银行合约编号
-		//sb.append("<IttParty_Jrnl_No><![CDATA[]]></IttParty_Jrnl_No>"); //发起方流水号
-		sb.append("<Txn_Itt_IP_Adr><![CDATA["+ip+"]]></Txn_Itt_IP_Adr>"); //交易发起方IP地址
-		sb.append("</Transaction_Header>");
-		
-		sb.append("<Transaction_Body>");
-		sb.append("<request>");
-		sb.append("</request>");
-		sb.append("</Transaction_Body>");
-		sb.append("</Transaction>");
-		xml = sb.toString();
-
-		System.out.println("xml====>"+xml);
-		
-		System.out.println("请求报文"+formatXml(xml));
-		String respXml = sendAndGetXml(xml);
-		System.out.println("响应报文"+respXml);
-		return respXml;
-	}*/
-	
-	/**
 	 * 发送接收报文通用方法
 	 * @param xml
 	 * @return
@@ -175,8 +135,8 @@ public class PublicTransactionController {
 				map.put("signature", signature);
 				//发送请求报文获得响应报文
 				Map<Integer, InputStream> map2 = HttpUtil.doPost2("http://124.127.94.46:8181/interlink/interlink", map);
-				for (Entry<Integer, InputStream> entry : map2.entrySet()) { 
-					if(entry.getKey() == 200){
+				for (Entry<Integer, InputStream> entry : map2.entrySet()) {
+						log.info("响应码"+entry.getKey());
 						InputStream is = entry.getValue();
 						ByteArrayOutputStream bytestream = new ByteArrayOutputStream();
 						byte[] buffer=new byte[1024];
@@ -218,13 +178,10 @@ public class PublicTransactionController {
 						}else{
 							return "验签失败";
 						}		
-					}else{
-						return "响应码不是200,请求失败";
 					}
+					return null;
 				}
-				return null;
-				
-	}
+
 	
 /*	*//**
 	 * 文件上传接口

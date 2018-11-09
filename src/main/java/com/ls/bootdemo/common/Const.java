@@ -22,7 +22,7 @@ public class Const {
 	 */
 	public static final String CHANL_CUST_NO = "SC51000009020510801"; //电子银行合约编号
 	
-	public static String SYS_REQ_TIME = new SimpleDateFormat("yyyyMMdd HH:mm:ss").format(new Date());  //发起方交易时间
+	public static String SYS_REQ_TIME = new SimpleDateFormat("yyyyMMddHHmmssSSS").format(new Date());  //发起方交易时间
 	
 	public static String TXN_DT = new SimpleDateFormat("yyyyMMdd").format(new Date());  //交易日期
 	

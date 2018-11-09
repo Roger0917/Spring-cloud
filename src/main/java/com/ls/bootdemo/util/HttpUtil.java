@@ -183,11 +183,9 @@ public class HttpUtil {
 
                 //System.out.println(name +"-"+value);
             }
-            for (int i = 0; i < nvps.size(); i++) {
-               log.info(nvps.get(i).getName()+"---"+nvps.get(i).getValue());
-            }
             request.setEntity(new UrlEncodedFormEntity(nvps, HTTP.UTF_8));
-            log.info("uri"+request.getURI().toString());
+            log.info("请求地址"+request.getURI().toString());
+            log.info("请求参数"+nvps.toString());
             request.addHeader("Content-Type", "application/x-www-form-urlencoded");
             HttpResponse response = client.execute(request);
             int code = response.getStatusLine().getStatusCode();

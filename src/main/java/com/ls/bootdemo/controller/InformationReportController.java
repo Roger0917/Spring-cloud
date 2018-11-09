@@ -67,12 +67,12 @@ public class InformationReportController {
 		sb.append("<ElcSubAR_ID><![CDATA[]]></ElcSubAR_ID>"); //电子合约编号
 		sb.append("<Rvl_Rcrd_Num><![CDATA[3]]></Rvl_Rcrd_Num>");	//循环记录条数
 		sb.append("<LIST1 type='G'>");
-		sb.append("<Insn_Seq_No><![CDATA[]]></Insn_Seq_No>");	//指令序列号
-		sb.append("<Cash_Cst_AccNo><![CDATA[6227000132060030594]]></Cash_Cst_AccNo>");	//现金客户账户
-		sb.append("<CshMgt_Acc_TpCd><![CDATA[1]]></CshMgt_Acc_TpCd>"); //现金管理账户类型代码
-		sb.append("<CcyCd><![CDATA[156]]></CcyCd>"); //币种代码
-		sb.append("<BkltNo><![CDATA[]]></BkltNo>"); //存折册号
-		sb.append("<Dep_DepSeqNo><![CDATA[]]></Dep_DepSeqNo>"); //存款笔号
+		sb.append("<..Insn_Seq_No><![CDATA[]]></..Insn_Seq_No>");	//指令序列号
+		sb.append("<..Cash_Cst_AccNo><![CDATA[6227000132060030594]]></..Cash_Cst_AccNo>");	//现金客户账户
+		sb.append("<..CshMgt_Acc_TpCd><![CDATA[1]]></..CshMgt_Acc_TpCd>"); //现金管理账户类型代码
+		sb.append("<..CcyCd><![CDATA[156]]></..CcyCd>"); //币种代码
+		sb.append("<..BkltNo><![CDATA[]]></..BkltNo>"); //存折册号
+		sb.append("<..Dep_DepSeqNo><![CDATA[]]></..Dep_DepSeqNo>"); //存款笔号
 		sb.append("</LIST1>");
 
 		sb.append("<ASPD_ECD><![CDATA[00000879]]></ASPD_ECD>");
@@ -124,14 +124,15 @@ public class InformationReportController {
 		sb.append("<request>");
 		sb.append("<Rvl_Rcrd_Num><![CDATA[3]]></Rvl_Rcrd_Num>");	//循环记录条数
 		sb.append("<LIST1 p_type='G'>");
-		sb.append("<AccNo><![CDATA[6227003604320043309]]></AccNo>"); //账号
-		sb.append("<CCstTr_ID><![CDATA[]]></CCstTr_ID>"); //现金客户树编号
-		sb.append("<CCstTrNdID><![CDATA[]]></CCstTrNdID>"); //现金客户树节点编号
+		sb.append("<..AccNo><![CDATA[6227003604320043309]]></..AccNo>"); //账号
+		sb.append("<..CCstTr_ID><![CDATA[]]></..CCstTr_ID>"); //现金客户树编号
+		sb.append("<..CCstTrNdID><![CDATA[]]></..CCstTrNdID>"); //现金客户树节点编号
+		sb.append("</LIST1>");
 		sb.append("<CcyCd><![CDATA[157]]></CcyCd>"); //币种代码
 		sb.append("<CshEx_Cd><![CDATA[]]></CshEx_Cd>"); //钞汇代码
 		sb.append("<StDt><![CDATA[20180520]]></StDt>"); //开始日期
 		sb.append("<EdDt><![CDATA[20181105]]></EdDt>"); //结束日期
-		sb.append("</LIST1>");
+
 
 		sb.append("<ASPD_ECD><![CDATA[00000879]]></ASPD_ECD>");
 		sb.append("<SChl_No><![CDATA[000000000000000]]></SChl_No>");
@@ -180,9 +181,10 @@ public class InformationReportController {
 		sb.append("<request>");
 		sb.append("<Rvl_Rcrd_Num><![CDATA[3]]></Rvl_Rcrd_Num>");	//循环记录条数
 		sb.append("<LIST1 p_type='G'>");
-		sb.append("<AccNo><![CDATA[]]></..AccNo>"); //账号
-		sb.append("<Beg_Dtl_No><![CDATA[]]></Beg_Dtl_No>"); //起始明细号
-		sb.append("<End_Dtl_No><![CDATA[]]></End_Dtl_No>"); //结束明细号
+		sb.append("<..AccNo><![CDATA[]]></..AccNo>"); //账号
+		sb.append("<..Beg_Dtl_No><![CDATA[]]></..Beg_Dtl_No>"); //起始明细号
+		sb.append("<..End_Dtl_No><![CDATA[]]></..End_Dtl_No>"); //结束明细号
+		sb.append("</LIST1>");
 		sb.append("<StDt><![CDATA[]]></StDt>"); //开始日期
 		sb.append("<EdDt><![CDATA[]]></EdDt>"); //结束日期
 		sb.append("<Amt_LwrLmt_Val><![CDATA[]]></Amt_LwrLmt_Val>"); //金额下限值
@@ -196,7 +198,6 @@ public class InformationReportController {
 		sb.append("<Acrt_Enqr_Ind><![CDATA[]]></Acrt_Enqr_Ind>"); //精确查询标志
 		sb.append("<Rmrk><![CDATA[]]></Rmrk>"); //备注
 		sb.append("<Rvrs_Txn_Ind><![CDATA[]]></Rvrs_Txn_Ind>"); //冲正交易标志
-		sb.append("</LIST1>");
 		sb.append("</request>");
 		sb.append("</Transaction_Body>");
 		sb.append("</Transaction>");
