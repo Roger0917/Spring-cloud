@@ -1,6 +1,7 @@
 package com.ls.bootdemo.util;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -175,7 +176,7 @@ public class Des3Util {
     *
     * lee on 2017-08-09 10:52:54
     */ 
-    public static String decode3Des(String key, String desStr){  
+    public static byte[] decode3Des(String key, String desStr){
     	Base64 base64 = new Base64();
     	//byte[] keybyte = hex(key);
     	byte[] keybyte = Base64.decodeBase64(key);
@@ -187,9 +188,9 @@ public class Des3Util {
             //解密  
             Cipher c1 = Cipher.getInstance("DESede");  
             c1.init(Cipher.DECRYPT_MODE, deskey);  
-            String pwd = new String(c1.doFinal(src),"utf-8");
-//            return c1.doFinal(src);  
-            return pwd;
+            //String pwd = new String(c1.doFinal(src),"utf-8");
+            return c1.doFinal(src);
+            //return pwd;
         } catch (NoSuchAlgorithmException e1) {
             // TODO: handle exception  
             e1.printStackTrace();  
@@ -202,4 +203,22 @@ public class Des3Util {
     }
 
 
+	public static byte[] encrypt2(String key,String str) throws UnsupportedEncodingException, NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
+    	byte[] keybyte = Base64.decodeBase64(key);
+		SecretKey deskey = new SecretKeySpec(keybyte, "DESede"); //用到javax下的SecreKey,传入密钥和加密方式    
+		byte[] input =str.getBytes("UTF-8"); //需要字节数组类型    utf-8
+		Cipher c1 = Cipher.getInstance("DESede/ECB/PKCS5Padding"); //emmm....获得一个Cipher实例
+		c1.init(Cipher.ENCRYPT_MODE, deskey); //加载这个加密算法 
+		byte[] str1 = c1.doFinal(input);
+		return str1;
+	}
+
+	public static byte[] decrtpt2(String key,byte[] str1) throws BadPaddingException, IllegalBlockSizeException, InvalidKeyException, NoSuchPaddingException, NoSuchAlgorithmException {
+    	byte[] keybyte = Base64.decodeBase64(key);
+		SecretKey deskey2 = new SecretKeySpec(keybyte, "DESede");
+		Cipher c2 = Cipher.getInstance("DESede");
+		c2.init(Cipher.DECRYPT_MODE, deskey2);//加载解密算法
+		byte[] str2 = c2.doFinal(str1);//获得解密后的数据
+		return  str2;
+	}
 }

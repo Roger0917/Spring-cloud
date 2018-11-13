@@ -171,23 +171,28 @@ public class HttpUtil {
             // 定义HttpClient  
             HttpClient client = new DefaultHttpClient();
             // 实例化HTTP方法  
-            HttpPost request = new HttpPost();
-            request.setURI(new URI(url));
+            HttpPost httpPost = new HttpPost();
+            httpPost.setURI(new URI(url));
 
             //设置参数
             List<NameValuePair> nvps = new ArrayList<NameValuePair>();
             for (Iterator iter = params.keySet().iterator(); iter.hasNext(); ) {
                 String name = (String) iter.next();
                 String value = String.valueOf(params.get(name));
-                nvps.add(new BasicNameValuePair(name, URLEncoder.encode(value)));
-
+                nvps.add(new BasicNameValuePair(name,value));
+                //URLDecoder.decode()
                 //System.out.println(name +"-"+value);
             }
-            request.setEntity(new UrlEncodedFormEntity(nvps, HTTP.UTF_8));
-            log.info("请求地址"+request.getURI().toString());
+            httpPost.setEntity(new UrlEncodedFormEntity(nvps, HTTP.UTF_8));
+            log.info("请求地址"+httpPost.getURI().toString());
             log.info("请求参数"+nvps.toString());
-            request.addHeader("Content-Type", "application/x-www-form-urlencoded");
-            HttpResponse response = client.execute(request);
+            log.info("加密后xml Urlencode后字符串数据长度"+nvps.get(1).getName()+nvps.get(1).getValue().length());
+            String aa = URLDecoder.decode(nvps.get(1).getValue());
+            byte[] ii = Base64.decodeBase64(aa);
+            //log.info("ii"+ii.length);
+            log.info("qq"+nvps.get(1).getName()+Base64.decodeBase64(nvps.get(1).getValue()).length);
+            httpPost.setHeader("Content-type", "application/x-www-form-urlencoded");
+            HttpResponse response = client.execute(httpPost);
             int code = response.getStatusLine().getStatusCode();
             if (code == 200) {
                 //请求成功

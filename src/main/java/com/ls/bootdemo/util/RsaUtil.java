@@ -65,22 +65,22 @@ public class RsaUtil {
 	}
 	
 	 //用md5生成内容摘要，再用RSA的私钥加密，进而生成数字签名
-    public static String getMd5Sign(String content , PrivateKey privateKey) throws Exception {
+    public static byte[] getMd5Sign(String content , PrivateKey privateKey) throws Exception {
         byte[] contentBytes = content.getBytes("utf-8");
         Signature signature = Signature.getInstance("MD5withRSA");
         signature.initSign(privateKey);
         signature.update(contentBytes);
         byte[] signs = signature.sign();
-        return Base64.encodeBase64String(signs);
+        return signs;
     }
 
     //对用md5和RSA私钥生成的数字签名进行验证
-   public static boolean verifyWhenMd5Sign(String content, String sign, PublicKey publicKey) throws Exception {
+   public static boolean verifyWhenMd5Sign(String content, byte[] sign, PublicKey publicKey) throws Exception {
         byte[] contentBytes = content.getBytes("utf-8");
         Signature signature = Signature.getInstance("MD5withRSA");
         signature.initVerify(publicKey);
         signature.update(contentBytes);
-        return signature.verify(Base64.decodeBase64(sign));
+        return signature.verify(sign);
     }
 
     /**
@@ -116,11 +116,38 @@ public class RsaUtil {
 
 	
 	public static void main(String[] args) throws Exception {
-        List list = RsaUtil.genKeyPair();
-        PrivateKey pri = (PrivateKey) list.get(0);
-        String aa = (String) list.get(1);
-        boolean b = Arrays.equals(pri.getEncoded(),getPrivateKey(aa).getEncoded());
-        System.out.println("b"+b);
-	}
+        KeyPairGenerator keyPairGen = null;
+        try {
+            keyPairGen = KeyPairGenerator.getInstance("RSA");
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        // 初始化密钥对生成器，密钥大小为96-1024位
+        keyPairGen.initialize(1024);
+        // 生成一个密钥对，保存在keyPair中
+        KeyPair keyPair = keyPairGen.generateKeyPair();
+        // 得到私钥
+        RSAPrivateKey privateKey = (RSAPrivateKey) keyPair.getPrivate();
+        // 得到公钥
+        RSAPublicKey publicKey = (RSAPublicKey) keyPair.getPublic();
+        String privateKeyString = "";
+        // 得到公钥字符串
+        System.out.println("公钥字节位数"+publicKey.getEncoded().length);
+        String publicKeyString = Base64.encodeBase64String(publicKey.getEncoded());
+        System.out.println("公钥base64字符串"+publicKeyString);
+        System.out.println("公钥base64字符串长度"+publicKeyString.length());
+        // 得到私钥字符串
+        System.out.println("私钥字节位数"+privateKey.getEncoded().length);
+        privateKeyString = Base64.encodeBase64String(privateKey.getEncoded());
+        System.out.println("私钥字符串"+privateKeyString);
+        System.out.println("私钥base64字符串长度"+privateKeyString.length());
 
+        RSAPublicKey publicKey1 = getPublicKey(publicKeyString);
+        RSAPrivateKey privateKey1 = getPrivateKey(privateKeyString);
+        Boolean bo1 = Arrays.equals(publicKey.getEncoded(),publicKey1.getEncoded());
+        Boolean bo2 = Arrays.equals(privateKey.getEncoded(),privateKey1.getEncoded());
+        log.info(""+bo1+bo2);
+    }
 }
+
+

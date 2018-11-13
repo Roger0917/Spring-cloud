@@ -78,7 +78,7 @@ public class ReplaceRecPayController {
 		sb.append("<TAmt><![CDATA[]]></TAmt"); //总金额
 		sb.append("<TDnum><![CDATA[]]></TDnum>"); //总笔数
 		sb.append("<VCHR_TP_CODE><![CDATA[]]></VCHR_TP_CODE>"); //凭证类型 
-		sb.append("</Lng_Vrsn><![CDATA[]]></Lng_Vrsn>"); //语言版本
+		sb.append("<Lng_Vrsn><![CDATA[]]></Lng_Vrsn>"); //语言版本
 		sb.append("</request>");
 		sb.append("</Transaction_Body>");
 		sb.append("</Transaction>");

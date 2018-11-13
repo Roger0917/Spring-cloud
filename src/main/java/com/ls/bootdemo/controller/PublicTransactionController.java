@@ -8,6 +8,7 @@ import java.io.StringWriter;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.interfaces.RSAPrivateKey;
+import java.security.interfaces.RSAPublicKey;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.Map.Entry;
@@ -21,6 +22,7 @@ import com.ls.bootdemo.util.RsaUtil;
 import lombok.extern.slf4j.Slf4j;
 
 import org.apache.commons.codec.binary.Base64;
+import org.codehaus.jackson.map.Serializers;
 import org.dom4j.DocumentException;
 import org.dom4j.io.OutputFormat;
 import org.dom4j.io.SAXReader;
@@ -29,7 +31,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
+import sun.security.krb5.internal.crypto.Des;
+import sun.security.krb5.internal.crypto.Des3;
 
 
 /**
@@ -50,7 +53,8 @@ public class PublicTransactionController {
 	private String date2 = Const.TXN_DT;
 	private String date3 = Const.TXN_TM;
 	private String ip = Const.Txn_Itt_IP_Adr;
-	
+
+	private static String LocalPubRsa = Const.LocalPubRSA;
 	private static String priRsa = Const.LocalPriRsa;
 	private static String pubRsa = Const.CCBPubRsa;
 	private static String deS = Const.Des3Key;
@@ -74,32 +78,32 @@ public class PublicTransactionController {
 		sb.append("<SYS_REQ_TIME><![CDATA["+ date +"]]></SYS_REQ_TIME>"); //发起方交易时间
 		sb.append("<SYS_TX_VRSN><![CDATA[01]]></SYS_TX_VRSN>"); //服务版本号 
 		sb.append("<TXN_DT><![CDATA["+ date2 +"]]></TXN_DT>"); //交易日期
-		sb.append("<TXN_TM><![CDATA["+ date3 +"]]> </TXN_TM>"); //交易时间
-		sb.append("<TXN_STFF_ID><![CDATA[333333]]> </TXN_STFF_ID>"); //交易人员编号
+		sb.append("<TXN_TM><![CDATA["+ date3 +"]]></TXN_TM>"); //交易时间
+		sb.append("<TXN_STFF_ID><![CDATA[333333]]></TXN_STFF_ID>"); //交易人员编号
 		sb.append("<MULTI_TENANCY_ID><![CDATA[CN000]]></MULTI_TENANCY_ID>"); //多实体标识
 		sb.append("<LNG_ID><![CDATA[zh-cn]]></LNG_ID>"); //语言标识
-		/*sb.append("<REC_IN_PAGE></REC_IN_PAGE>");
-		sb.append("<PAGE_JUMP></PAGE_JUMP>");
-		sb.append("<STS_TRACE_ID></STS_TRACE_ID>");*/
+		sb.append("<REC_IN_PAGE><![CDATA[3]]></REC_IN_PAGE>");
+		sb.append("<PAGE_JUMP><![CDATA[1]]></PAGE_JUMP>");
+		//sb.append("<STS_TRACE_ID><![CDATA[]]></STS_TRACE_ID>");
 		sb.append("<CHNL_CUST_NO><![CDATA["+ chanl_cust_no+ "]]></CHNL_CUST_NO>"); //电子银行合约编号
 		//sb.append("<IttParty_Jrnl_No><![CDATA[]]></IttParty_Jrnl_No>"); //发起方流水号
 		sb.append("<Txn_Itt_IP_Adr><![CDATA["+ip+"]]></Txn_Itt_IP_Adr>"); //交易发起方IP地址
 		sb.append("</Transaction_Header>");
 		
-		/*sb.append("<Transaction_Body>");
+		sb.append("<Transaction_Body>");
 		sb.append("<request>");
 		//sb.append("<COM_ENTITY>");
-		sb.append("<ASPD_ECD><![CDATA[00000881]]></ASPD_ECD>");
+		/*sb.append("<ASPD_ECD><![CDATA[00000881]]></ASPD_ECD>");
 		sb.append("<SChl_No><![CDATA[000000000000000]]></SChl_No>");
 		sb.append("<FwCtl_Node_ID><![CDATA[000000000000000]]></FwCtl_Node_ID>");
 		sb.append("<SvM24Hr_Ind><![CDATA[0]]></SvM24Hr_Ind>");
 		sb.append("<Tmzon_ECD><![CDATA[08]]></Tmzon_ECD>");
 		sb.append("<Cmpt_Ent_ID><![CDATA[0000CN000]]></Cmpt_Ent_ID>");
 		sb.append("<CCstTr_ID><![CDATA[CMN0003101838]]></CCstTr_ID>");
-		sb.append("<CCstTrNdID><![CDATA[ND75389000000047925600011]]></CCstTrNdID>");
+		sb.append("<CCstTrNdID><![CDATA[ND75389000000047925600011]]></CCstTrNdID>");*/
 		//sb.append("</COM_ENTITY>");
 		sb.append("</request>");
-		sb.append("</Transaction_Body>");*/
+		sb.append("</Transaction_Body>");
 		sb.append("</Transaction>");
 		xml = sb.toString();
 		System.out.println("xml====>"+xml);
@@ -122,13 +126,23 @@ public class PublicTransactionController {
 				System.out.println("本地私钥串"+priRsa);
 				System.out.println("3des密钥串"+deS);
 				RSAPrivateKey pKey = RsaUtil.getPrivateKey(priRsa);
-				String signature = RsaUtil.getMd5Sign(xml, pKey);
+				byte[] lsignatureByte = RsaUtil.getMd5Sign(xml, pKey);
+				String signature = Base64.encodeBase64String(lsignatureByte);
 				//报文加解密des密钥
 				//报文加密
-				xml = Des3Util.encode3Des(deS, xml);
+				//xml = Des3Util.encode3Des(deS, xml);
+				byte [] xmlb = Des3Util.encrypt2(deS,xml);
+				log.info("加密后字节数组长度"+xmlb.length);
+				xml = Base64.encodeBase64String(xmlb);
 				System.out.println("加密后xml字符串长度"+xml.length());
-				log.info("xml"+"---"+xml);
-				log.info("signature"+"---"+signature);
+				log.info("xml原文加密后Base64串"+"---"+xml);
+				log.info("xml原文签名后Base64串"+"---"+signature);
+
+				RSAPublicKey rsaPublicKey= RsaUtil.getPublicKey(LocalPubRsa);
+				Boolean result = RsaUtil.verifyWhenMd5Sign(xml,lsignatureByte,rsaPublicKey);
+				log.info("本地验签xml"+result);
+
+
 				Map<String, String> map =new LinkedHashMap<>();
 				map.put("chanl_cust_no", chanl_cust_no);
 				map.put("xml",xml);
@@ -160,21 +174,23 @@ public class PublicTransactionController {
 						byte[] signatureByte = new byte[signatureLength];
 						//截取数字签名字节数组
 						System.arraycopy(data, 10, signatureByte, 0, signatureLength);
-						String respSignature = Base64.encodeBase64String(signatureByte);	
+						//String respSignature = Base64.encodeBase64String(signatureByte);
 						//截取报文密文
 						byte[] respxml = new byte[data.length-10-signatureLength];
 						System.arraycopy(data, 10+signatureLength, respxml, 0, respxml.length);
-						String respXml = Base64.encodeBase64String(respxml);
+						String respXmlStr = Base64.encodeBase64String(respxml);
 						//解密
-						String decodeRespXml = Des3Util.decode3Des(deS, respXml);
+						byte[] decodeRespXml = Des3Util.decrtpt2(deS,respxml);
+						String decodeRespXmlStr = new String(decodeRespXml,"utf-8");
+						log.info("解密后响应报文"+decodeRespXmlStr);
 						//验证签名
 						PublicKey publicKey = RsaUtil.getPublicKey(pubRsa);
-						Boolean verify = RsaUtil.verifyWhenMd5Sign(decodeRespXml, respSignature, publicKey);
+						Boolean verify = RsaUtil.verifyWhenMd5Sign(decodeRespXmlStr, signatureByte, publicKey);
 						if(verify==true){
 							//验签成功
 							//解密响应报文
 							log.info("验签成功");
-							return decodeRespXml;
+							return decodeRespXmlStr;
 						}else{
 							return "验签失败";
 						}		
