@@ -94,6 +94,7 @@ public class ExchangeRsaController {
 				log.info(decodeRsabase);
 				return decodeRsabase;
 			}else{
+				log.info("响应码"+entry.getKey());
 				InputStream is = entry.getValue();
 				ByteArrayOutputStream bytestream = new ByteArrayOutputStream();
 				byte[] buffer=new byte[1024];

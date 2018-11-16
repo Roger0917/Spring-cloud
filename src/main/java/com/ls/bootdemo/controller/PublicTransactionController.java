@@ -22,17 +22,13 @@ import com.ls.bootdemo.util.RsaUtil;
 import lombok.extern.slf4j.Slf4j;
 
 import org.apache.commons.codec.binary.Base64;
-import org.codehaus.jackson.map.Serializers;
 import org.dom4j.DocumentException;
 import org.dom4j.io.OutputFormat;
 import org.dom4j.io.SAXReader;
 import org.dom4j.io.XMLWriter;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import sun.security.krb5.internal.crypto.Des;
-import sun.security.krb5.internal.crypto.Des3;
 
 
 /**
@@ -44,10 +40,10 @@ import sun.security.krb5.internal.crypto.Des3;
 @Controller
 @RequestMapping("/ptc")
 public class PublicTransactionController {
-	
+
 	private String xml = "";
 	private String signature = "";
-	
+
 	private static String chanl_cust_no = Const.CHANL_CUST_NO;
 	private String date = Const.SYS_REQ_TIME;
 	private String date2 = Const.TXN_DT;
@@ -55,8 +51,8 @@ public class PublicTransactionController {
 	private String ip = Const.Txn_Itt_IP_Adr;
 
 	private static String LocalPubRsa = Const.LocalPubRSA;
-	private static String priRsa = Const.LocalPriRsa;
-	private static String pubRsa = Const.CCBPubRsa;
+	private static String LocalPriRsa = Const.LocalPriRsa;
+	private static String CcbPubRsa = Const.CCBPubRsa;
 	private static String deS = Const.Des3Key;
 	/**
 	 * 签到接口
@@ -82,8 +78,8 @@ public class PublicTransactionController {
 		sb.append("<TXN_STFF_ID><![CDATA[333333]]></TXN_STFF_ID>"); //交易人员编号
 		sb.append("<MULTI_TENANCY_ID><![CDATA[CN000]]></MULTI_TENANCY_ID>"); //多实体标识
 		sb.append("<LNG_ID><![CDATA[zh-cn]]></LNG_ID>"); //语言标识
-		sb.append("<REC_IN_PAGE><![CDATA[3]]></REC_IN_PAGE>");
-		sb.append("<PAGE_JUMP><![CDATA[1]]></PAGE_JUMP>");
+		/*sb.append("<REC_IN_PAGE><![CDATA[3]]></REC_IN_PAGE>");
+		sb.append("<PAGE_JUMP><![CDATA[1]]></PAGE_JUMP>");*/
 		//sb.append("<STS_TRACE_ID><![CDATA[]]></STS_TRACE_ID>");
 		sb.append("<CHNL_CUST_NO><![CDATA["+ chanl_cust_no+ "]]></CHNL_CUST_NO>"); //电子银行合约编号
 		//sb.append("<IttParty_Jrnl_No><![CDATA[]]></IttParty_Jrnl_No>"); //发起方流水号
@@ -117,21 +113,21 @@ public class PublicTransactionController {
 
 	/**
 	 * 发送接收报文通用方法
-	 * @param xml
+	 * @param originxml
 	 * @return
 	 * @throws Exception
 	 */
-	public String sendAndGetXml(String xml) throws Exception{
+	public String sendAndGetXml(String originxml) throws Exception{
 		//报文签名
-				System.out.println("本地私钥串"+priRsa);
+				System.out.println("本地私钥串"+LocalPriRsa);
 				System.out.println("3des密钥串"+deS);
-				RSAPrivateKey pKey = RsaUtil.getPrivateKey(priRsa);
-				byte[] lsignatureByte = RsaUtil.getMd5Sign(xml, pKey);
+				RSAPrivateKey pKey = RsaUtil.getPrivateKey(LocalPriRsa);
+				byte[] lsignatureByte = RsaUtil.getMd5Sign(originxml, pKey);
 				String signature = Base64.encodeBase64String(lsignatureByte);
 				//报文加解密des密钥
 				//报文加密
 				//xml = Des3Util.encode3Des(deS, xml);
-				byte [] xmlb = Des3Util.encrypt2(deS,xml);
+				byte [] xmlb = Des3Util.encrypt2(deS,originxml);
 				log.info("加密后字节数组长度"+xmlb.length);
 				xml = Base64.encodeBase64String(xmlb);
 				System.out.println("加密后xml字符串长度"+xml.length());
@@ -139,8 +135,8 @@ public class PublicTransactionController {
 				log.info("xml原文签名后Base64串"+"---"+signature);
 
 				RSAPublicKey rsaPublicKey= RsaUtil.getPublicKey(LocalPubRsa);
-				Boolean result = RsaUtil.verifyWhenMd5Sign(xml,lsignatureByte,rsaPublicKey);
-				log.info("本地验签xml"+result);
+				Boolean result = RsaUtil.verifyWhenMd5Sign(originxml,signature,rsaPublicKey);
+				log.info("本地验签xml"+"---"+result);
 
 
 				Map<String, String> map =new LinkedHashMap<>();
@@ -174,7 +170,7 @@ public class PublicTransactionController {
 						byte[] signatureByte = new byte[signatureLength];
 						//截取数字签名字节数组
 						System.arraycopy(data, 10, signatureByte, 0, signatureLength);
-						//String respSignature = Base64.encodeBase64String(signatureByte);
+						String respSignature = Base64.encodeBase64String(signatureByte);
 						//截取报文密文
 						byte[] respxml = new byte[data.length-10-signatureLength];
 						System.arraycopy(data, 10+signatureLength, respxml, 0, respxml.length);
@@ -184,8 +180,8 @@ public class PublicTransactionController {
 						String decodeRespXmlStr = new String(decodeRespXml,"utf-8");
 						log.info("解密后响应报文"+decodeRespXmlStr);
 						//验证签名
-						PublicKey publicKey = RsaUtil.getPublicKey(pubRsa);
-						Boolean verify = RsaUtil.verifyWhenMd5Sign(decodeRespXmlStr, signatureByte, publicKey);
+						PublicKey publicKey = RsaUtil.getPublicKey(CcbPubRsa);
+						Boolean verify = RsaUtil.verifyWhenMd5Sign(decodeRespXmlStr,respSignature, publicKey);
 						if(verify==true){
 							//验签成功
 							//解密响应报文

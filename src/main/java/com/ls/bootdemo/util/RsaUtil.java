@@ -75,12 +75,12 @@ public class RsaUtil {
     }
 
     //对用md5和RSA私钥生成的数字签名进行验证
-   public static boolean verifyWhenMd5Sign(String content, byte[] sign, PublicKey publicKey) throws Exception {
+   public static boolean verifyWhenMd5Sign(String content, String sign, PublicKey publicKey) throws Exception {
         byte[] contentBytes = content.getBytes("utf-8");
         Signature signature = Signature.getInstance("MD5withRSA");
         signature.initVerify(publicKey);
         signature.update(contentBytes);
-        return signature.verify(sign);
+        return signature.verify(Base64.decodeBase64(sign));
     }
 
     /**
@@ -134,12 +134,12 @@ public class RsaUtil {
         // 得到公钥字符串
         System.out.println("公钥字节位数"+publicKey.getEncoded().length);
         String publicKeyString = Base64.encodeBase64String(publicKey.getEncoded());
-        System.out.println("公钥base64字符串"+publicKeyString);
+        System.out.println("公钥base64字符串"+publicKeyString+"---");
         System.out.println("公钥base64字符串长度"+publicKeyString.length());
         // 得到私钥字符串
         System.out.println("私钥字节位数"+privateKey.getEncoded().length);
         privateKeyString = Base64.encodeBase64String(privateKey.getEncoded());
-        System.out.println("私钥字符串"+privateKeyString);
+        System.out.println("私钥字符串"+privateKeyString+"---");
         System.out.println("私钥base64字符串长度"+privateKeyString.length());
 
         RSAPublicKey publicKey1 = getPublicKey(publicKeyString);
@@ -147,6 +147,11 @@ public class RsaUtil {
         Boolean bo1 = Arrays.equals(publicKey.getEncoded(),publicKey1.getEncoded());
         Boolean bo2 = Arrays.equals(privateKey.getEncoded(),privateKey1.getEncoded());
         log.info(""+bo1+bo2);
+
+        String content = "abcde";
+        byte [] yy = getMd5Sign(content,privateKey1);
+        Boolean xx = verifyWhenMd5Sign(content,Base64.encodeBase64String(yy),publicKey1);
+        log.info("---"+xx);
     }
 }
 

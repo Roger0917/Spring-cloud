@@ -58,23 +58,25 @@ public class Const {
 	/**	代收代付  * */
 	public static final String Txn_SN = ""; //客户序列号
 	
-	public static final String EBnk_SvAr_ID = ""; //电子银行服务合约编号
+	public static final String EBnk_SvAr_ID = "753890000000479256"; //电子银行服务合约编号,客户在建行的客户号
 	
 	public static final String Entrst_Prj_ID = "510130110"; //委托项目编号
 	
-	public static final String Prj_Use_ID = "";  //项目用途编号
+	public static final String Prj_Use_ID = "zldf00001";  //项目用途编号,代付
+
+	public static final String Prj_Use_ID2 = "zlds00001"; //项目用途编号,代收
 	
 	public static final String EtrUnt_AccNo = "51050164860300000409"; //委托单位账号
 	
-	public static final String TDP_ID = "";  //制单员编号
+	public static final String TDP_ID = "333333";  //制单员编号
 	
-	public static final String CCY_ID = ""; //币种编号
+	public static final String CCY_ID = "156"; //币种编号
 	
-	public static final String Rvw_Ind = ""; //按批次复核标志
+	public static final String Rvw_Ind = "1"; //按批次复核标志
 	
-	public static final String VCHR_TP_CODE = "";  //凭证类型
+	public static final String VCHR_TP_CODE = "0";  //凭证类型,单笔-0,批量-1
 
 	public static void main(String[] args) {
-		System.out.println("MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBALY1UM09J4a1P4KeSuhCnXs+qxOe3ojKD5aa0XD5sczD/EVKMStD28kXHwjYCVbmiMC2/BtdYV4Vog4AyhV6wlrdgR8Xl1xF8QMEV3guFU9w039+fWimvZXOYNH2ILfh1Nutt4+dyvAli4TLvAuNdzn5z6yr7VhhEA/ZIhdpl0hXAgMBAAECgYAolfunm8WgJeM9rxC0Z5I4j57/wdWD1q5eN6ILbjMCj20z6fDF2Fmuky3ghG6gIr23X4sMdWJo2Jy+TcK1wiBkR+la3DXMxfqAC9n3h0uPel+kRoQ3ErHvGCWpWNgfctn1UOMQQAQd2F36EymsGte0kh5e0VtdMuvYi1MU6bvc4QJBAPgoh9a1Xpt5yTBDghZkdvJfs/TRoM/AaAwfV3/QQtRKk2+NxdLIvhjsCcr7QGVwcyMZamgTSmV60+0TIKmKu68CQQC790iyZ0mIhwsjw6eBl9Mp+edrFBiHCg3pLINum4JLI6egm3nXjvJz87gCr8LDylIVMjEDhi9DJjON2666/B/ZAkEAr7ICesFueiV/i+w/7hqzHGclwe+pK23OPMbz7EpHBobGW/TEWrhF3t8/D7dToH49Bly4OXdu9OpBoVgph9/xgQJAPCwphZMzIxW4JzbXRNFJtEJgJxND1tcNJPwvBxWZXFyJqQycsLj+PMhku9dwTiVSqZ5rumkWcDSmhF8zTICx4QJAFbOtiISVcpuQXli6/oh5T+IFbWSoN0Asdqz8i2bcmgVD+d9TRQCKKI28GkQUx90IZXYUNPyC0P7aGFUlSeCq5w==".equals(LocalPriRsa));
+		System.out.println("MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCNL2lEclzJRScUAnI96KFv3A/0XZAUzbxe4ccr3AhP7gHZAgpn/zByYdyMQHhnuTOsTSXRjRpQT/8X/nv7dnSnj1c6fAvgKu593wtTD3cD8Ykdrfe0hmyi1mn/wLSd5Oug4cZLVhVNsHwwtWpzpl8QzJVWHp/fzWvgcSmpa7xyjQIDAQAB".equals(CCBPubRsa));
 	}
 }

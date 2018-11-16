@@ -1,0 +1,9 @@
+package com.ls.bootdemo.util;
+
+public class AA {
+    static String aa = "MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBAJtr4l5HcN0lANZEafp8EKZBgwb0MqFsDjV08Pc9uc+X/kpy2+xdqZGrpaYFcaseTn5Oti8vff4E3M6IfJPBWYChRJy9PaTjL52Mrt95FVlFZGzMQVzk2/RyDIA5NegF5aEN8f4NolFP7NHnQaYo56CPqnrvVdDTY65a5AGeK+5lAgMBAAECgYAwqmpaTRJpHJIThZ6NoVVxSagmgEZuRzB3yqM9N6W7/ALS+v4kF/vlshKPVrsN8tJvOGRRiBRyesFNJm2jsnI8mC/2vRbQKRCpLSEBpg2bxW9Vluopn6S1bVlobPxA36H7yPHrFirunYZ44S9BD/9dJPgY1+osphpCS2UWgyN+oQJBANz5mYnpaw1JiKW3KBt+Qwhu9iTF7P7Auf/K2DtVpuv2oThN+0k3Jsg+qUtpWFa+nAglNJ/wfEUQ3zIGvZBz+80CQQC0Dljtn8i2qdyXsvTqp5GNnvx+5DurGGh3STTXoa5r3xBD2UddyU4tjBJh7ye4FQS5jg81MrMZyG5oW4B0cBT5AkBWtidW496bPzC8/othhoFdbNVwBq8CJLSYOIvzdJ/k1knbY1ZpG5g/Wb9rFTKSD4gA9kCZRnAtVfqPke+PIMQ9AkBOKzxoTUoyIyRlp4e0p/ME7NTpseRFr18LCnkqdELpCfphul7FVLPgCkOgyNcRj+5xMD9h9RTUSLPGEpN9+XrhAkEAgDOe7NdgVhHJwMWnUZw0yN9ARBe0tjfma1ZpBE4xHKNZW/IkkelVKSufNbDORjdoUFf6VLzGwLJf9bNfiQ95fQ==";
+
+    public static void main(String[] args) {
+        System.out.println(aa.length());
+    }
+}
